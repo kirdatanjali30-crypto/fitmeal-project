@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Food Menu | FitMeal{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <h1>Our Food Menu 🍽️</h1>
+
+    <p>
+        Choose your favourite homemade,
+        diet and fitness meals.
+    </p>
+
+</section>
+
+<form method="GET"
+      action="{{ url_for('menu') }}"
+      class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search food..."
+        value="{{ search }}"
+    >
+
+    <button type="submit" class="btn">
+        Search
+    </button>
+
+</form>
+
+<div class="category-links">
+
+    <a href="{{ url_for('menu') }}">All Foods</a>
+
+    <a href="{{ url_for('menu', category='Homemade') }}">
+        Homemade
+    </a>
+
+    <a href="{{ url_for('menu', category='Diet') }}">
+        Diet Food
+    </a>
+
+    <a href="{{ url_for('menu', category='Fitness') }}">
+        Fitness Food
+    </a>
+
+</div>
+
+<div class="food-grid">
+
+    {% for food in foods %}
+
+    <div class="card food-card">
+
+        <div class="food-icon">🥗</div>
+
+        <h3>{{ food['name'] }}</h3>
+
+        <p>{{ food['description'] }}</p>
+
+        <p>
+            <strong>Category:</strong>
+            {{ food['category'] }}
+        </p>
+
+        <h3>₹{{ "%.2f"|format(food['price']) }}</h3>
+
+        <a href="{{ url_for('food_details', food_id=food['id']) }}"
+           class="btn">
+            View Details
+        </a>
+
+        {% if session.get('user_id') %}
+
+        <form
+            action="{{ url_for('add_to_cart', food_id
