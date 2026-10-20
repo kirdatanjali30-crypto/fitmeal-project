@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Login | FitMeal{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>Welcome Back! 🥗</h2>
+    <p>Login to your FitMeal account.</p>
+
+    <form method="POST" action="{{ url_for('login') }}">
+
+        <label>Email Address</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button type="submit" class="btn">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="{{ url_for('register') }}">Register Here</a>
+    </p>
+
+</div>
+
+{% endblock %}
