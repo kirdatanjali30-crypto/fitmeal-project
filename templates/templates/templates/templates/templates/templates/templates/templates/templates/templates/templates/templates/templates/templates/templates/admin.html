@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome to FitMeal Admin Panel!</p>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>Total Customers</h3>
+            <h2>{{ total_users }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Foods</h3>
+            <h2>{{ total_foods }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <h2>{{ total_orders }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Revenue</h3>
+            <h2>₹{{ total_revenue }}</h2>
+        </div>
+    </div>
+
+    <h2>Admin Management</h2>
+
+    <p><a href="{{ url_for('admin_foods') }}">Manage Foods</a></p>
+    <p><a href="{{ url_for('admin_orders') }}">Manage Orders</a></p>
+    <p><a href="{{ url_for('admin_subscriptions') }}">Manage Subscriptions</a></p>
+    <p><a href="{{ url_for('admin_customers') }}">Manage Customers</a></p>
+
+    <h2>Recent Orders</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+
+        {% for order in recent_orders %}
+        <tr>
+            <td>{{ order['id'] }}</td>
+            <td>{{ order['customer_name'] }}</td>
+            <td>₹{{ order['total_amount'] }}</td>
+            <td>{{ order['status'] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td cols
