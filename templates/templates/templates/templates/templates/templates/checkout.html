@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout | FitMeal{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>📦 Checkout</h1>
+    <p>Enter your delivery details.</p>
+
+    <h3>Order Summary</h3>
+
+    {% for item in items %}
+    <div class="summary-item">
+        <span>
+            {{ item.food['name'] }} × {{ item.quantity }}
+        </span>
+
+        <span>
+            ₹{{ "%.2f"|format(item.subtotal) }}
+        </span>
+    </div>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Total: ₹{{ "%.2f"|format(total) }}</h2>
+
+    <form method="POST" action="{{ url_for('checkout') }}">
+
+        <label>Delivery Address</label>
+
+        <textarea
+            name="address"
+            rows="4"
+            placeholder="Enter complete delivery address"
+            required></textarea>
+
+        <label>Payment Method</label>
+
+        <select name="payment_method" required>
+            <option value="COD">Cash on Delivery</option>
+            <option value="DEMO">Demo Payment</option>
+        </select>
+
+        <button type="submit" class="btn">
+            Place Order
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
