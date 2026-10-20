@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Tiffin Subscription | FitMeal{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <h1>📅 Tiffin Subscription Plans</h1>
+    <p>Choose a weekly or monthly homemade food plan.</p>
+</section>
+
+<div class="feature-grid">
+
+    {% for plan in plans %}
+
+    <div class="card">
+
+        <h2>{{ plan.name }}</h2>
+
+        <h3>{{ plan.duration }} Days</h3>
+
+        <h2>₹{{ plan.price }}</h2>
+
+        <p>Fresh homemade meals delivered to your doorstep.</p>
+
+        <form method="POST"
+              action="{{ url_for('subscription') }}">
+
+            <input type="hidden"
+                   name="plan"
+                   value="{{ plan.name }}">
+
+            <label>Subscription Start Date</label>
+
+            <input type="date"
+                   name="start_date"
+                   required>
+
+            <button type="submit" class="btn">
+                Subscribe Now
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="card">
+    <h3>Subscription Benefits</h3>
+    <ul>
+        <li>Fresh homemade food</li>
+        <li>Weekly and monthly plans</li>
+        <li>Easy subscription management</li>
+        <li>View remaining meals</li>
+    </ul>
+</div>
+
+{% endblock %}
