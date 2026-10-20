@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Order Details | FitMeal{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>Order Details</h1>
+
+    <h3>Order ID: #{{ order['id'] }}</h3>
+
+    <p>
+        <strong>Order Date:</strong>
+        {{ order['created_at'] }}
+    </p>
+
+    <p>
+        <strong>Delivery Address:</strong>
+        {{ order['address'] }}
+    </p>
+
+    <p>
+        <strong>Payment Method:</strong>
+        {{ order['payment_method'] }}
+    </p>
+
+    <p>
+        <strong>Order Status:</strong>
+        <span class="status">
+            {{ order['status'] }}
+        </span>
+    </p>
+
+    <hr>
+
+    <h2>Ordered Items</h2>
+
+    <div class="table-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item['food_name'] }}</td>
+
+                    <td>₹{{ "%.2f"|format(item['price']) }}</td>
+
+                    <td>{{ item['quantity'] }}</td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(item['price'] * item['quantity']) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <h2>Total: ₹{{ "%.2f"|format(order['total']) }}</h2>
+
+    <a href="{{ url_for('o
