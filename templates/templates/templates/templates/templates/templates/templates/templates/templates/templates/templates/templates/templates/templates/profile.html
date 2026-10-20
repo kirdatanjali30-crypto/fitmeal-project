@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | FitMeal{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>👤 My Profile</h1>
+
+    <p>Update your personal information.</p>
+
+    <form method="POST"
+          action="{{ url_for('profile') }}">
+
+        <label>Full Name</label>
+
+        <input
+            type="text"
+            name="name"
+            value="{{ user['name'] }}"
+            required>
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            value="{{ user['email'] }}"
+            readonly>
+
+        <label>Phone Number</label>
+
+        <input
+            type="tel"
+            name="phone"
+            value="{{ user['phone'] or '' }}">
+
+        <label>Delivery Address</label>
+
+        <textarea
+            name="address"
+            rows="4">{{ user['address'] or '' }}</textarea>
+
+        <button type="submit" class="btn">
+            Update Profile
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
