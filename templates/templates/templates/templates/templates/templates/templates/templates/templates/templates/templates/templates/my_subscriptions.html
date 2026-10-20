@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}My Subscriptions | FitMeal{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <h1>My Tiffin Subscriptions</h1>
+    <p>Manage your weekly and monthly plans.</p>
+</section>
+
+{% if subscriptions %}
+
+<div class="feature-grid">
+
+    {% for sub in subscriptions %}
+
+    <div class="card">
+
+        <h2>{{ sub['plan_name'] }}</h2>
+
+        <p>
+            <strong>Duration:</strong>
+            {{ sub['duration'] }} days
+        </p>
+
+        <p>
+            <strong>Start Date:</strong>
+            {{ sub['start_date'] }}
+        </p>
+
+        <p>
+            <strong>Total Price:</strong>
+            ₹{{ sub['total_price'] }}
+        </p>
+
+        <p>
+            <strong>Remaining Meals:</strong>
+            {{ sub['remaining_meals'] }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            {{ sub['status'] }}
+        </p>
+
+        {% if sub['status'] == 'Active' %}
+
+        <form
+            method="POST"
+            action="{{ url_for('cancel_subscription', subscription_id=sub['id']) }}"
+            onsubmit="return confirm('Cancel this subscription?');">
+
+            <button type="submit" class="btn danger">
+                Cancel Subscription
+            </button>
+
+        </form>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="card">
+    <h2>No subscriptions found.</h2>
+
+    <a href="{{ url_for('subscription') }}" class="btn">
+        Explore Tiffin Plans
+    </
