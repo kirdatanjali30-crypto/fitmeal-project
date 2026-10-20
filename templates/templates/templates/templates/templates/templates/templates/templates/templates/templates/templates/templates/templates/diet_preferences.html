@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Diet Preferences | FitMeal{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>🥗 My Diet Preferences</h1>
+
+    <p>Select your food preferences and fitness goal.</p>
+
+    <form method="POST"
+          action="{{ url_for('diet_preferences') }}">
+
+        <label>Food Preference</label>
+
+        <select name="preference" required>
+
+            <option value="Vegetarian">
+                Vegetarian
+            </option>
+
+            <option value="Non-Vegetarian">
+                Non-Vegetarian
+            </option>
+
+            <option value="Vegan">
+                Vegan
+            </option>
+
+        </select>
+
+        <label>Fitness Goal</label>
+
+        <select name="goal" required>
+
+            <option value="Healthy Eating">
+                Healthy Eating
+            </option>
+
+            <option value="Weight Management">
+                Weight Management
+            </option>
+
+            <option value="Muscle Building">
+                Muscle Building
+            </option>
+
+            <option value="General Fitness">
+                General Fitness
+            </option>
+
+        </select>
+
+        <label>Food Allergies</label>
+
+        <textarea
+            name="allergies"
+            rows="3"
+            placeholder="Example: peanuts, milk, etc."></textarea>
+
+        <button type="submit" class="btn">
+            Save Preferences
+        </button>
+
+    </form>
+
+</div>
+
+<section class="card">
+
+    <h2
